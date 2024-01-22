@@ -28,14 +28,14 @@ class authController extends Controller
 
         if (Auth::attempt($data)) {
             if(Auth::user() -> role == 'admin'){
-                dd('hai admin');
+                return redirect('/admin');
             } else if(Auth::user() -> role == 'bidan') {
                 dd('hai bidan');
             } else if(Auth::user() -> role == 'pasien'){
                 dd('hai pasien');
             }
         } else {
-            dd('gagal');
+            return redirect('/login');
         }
     }
 
