@@ -14,7 +14,7 @@ use App\Http\Controllers\adminController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/home',[index::class, 'indexOnLogin']) -> name('home');
+Route::get('/home',[authController::class, 'logout']) -> name('home');
 Route::get('/logout',[authController::class, 'logout']);
 
 Route::middleware(['guest']) -> group(
@@ -34,6 +34,9 @@ Route::middleware(['guest']) -> group(
 Route::middleware(['auth']) -> group(
     function(){
         Route::get('/admin',[adminController::class, 'index']) -> name('index');
+        Route::get('/admin/bidan',[adminController::class, 'showBidan']) -> name('showBidan');
+        Route::get('/admin/pasien',[adminController::class, 'showPasien']) -> name('showPasien');
+        Route::get('/admin/materi',[adminController::class, 'showMateri']) -> name('showMateri');
     }
 );
 

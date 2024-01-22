@@ -26,8 +26,8 @@
                     <span class="nav-label" style="margin-left: 6px">Dashboard</span>
                 </a>
             </li>
-            <li class="{{ Route::currentRouteName() == 'dataBidan-admin' ? 'active' : '' }}">
-                <a href="/bidan-admin">
+            <li class="{{ Route::currentRouteName() == 'showBidan' ? 'active' : '' }}">
+                <a href="/admin/bidan">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-file-earmark-medical-fill" viewBox="0 0 16 16">
                         <path
@@ -36,8 +36,8 @@
                     <span class="nav-label" style="margin-left: 6px">Data Bidan</span>
                 </a>
             </li>
-            <li class="{{ Route::currentRouteName() == 'dataPasien-admin' ? 'active' : '' }}">
-                <a href="/pasien-admin">
+            <li class="{{ Route::currentRouteName() == 'showPasien' ? 'active' : '' }}">
+                <a href="/admin/pasien">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-people-fill" viewBox="0 0 16 16">
                         <path
@@ -45,14 +45,19 @@
                     </svg>
                     <span class="nav-label" style="margin-left: 6px">Data Pasien</span></a>
             </li>
-            <li class="{{ Route::currentRouteName() == 'dataMateri-admin' ? 'active' : '' }}">
-                <a href="/materi-admin">
+            <li class="{{ Route::currentRouteName() == 'showMateri' ? 'active' : '' }}">
+                <a href="/admin/materi">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-file-earmark-fill" viewBox="0 0 16 16">
                         <path
                             d="M4 0h5.293A1 1 0 0 1 10 .293L13.707 4a1 1 0 0 1 .293.707V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zm5.5 1.5v2a1 1 0 0 0 1 1h2l-3-3z" />
                     </svg>
                     <span class="nav-label" style="margin-left: 6px">Data Materi</span></a>
+            </li>
+            <li>
+                <a href="/logout">
+                    <i class="fa fa-sign-out"></i>
+                    <span class="nav-label" style="margin-left: 6px">Keluar</span></a>
             </li>
         </ul>
     </div>
