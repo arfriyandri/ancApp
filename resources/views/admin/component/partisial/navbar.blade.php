@@ -55,7 +55,7 @@
                     <span class="nav-label" style="margin-left: 6px">Data Materi</span></a>
             </li>
             <li>
-                <a href="/logout">
+                <a href="/admin/logout">
                     <i class="fa fa-sign-out"></i>
                     <span class="nav-label" style="margin-left: 6px">Keluar</span></a>
             </li>

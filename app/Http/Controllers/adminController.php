@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Bidan;
 
 class adminController extends Controller
 {
@@ -11,10 +13,10 @@ class adminController extends Controller
     }
 
     public function showBidan(){
-        // $data['tittle'] = 'Data Bidan';
-        // $data['bidans'] = Bidan::all();
+        $data['tittle'] = 'Data Bidan';
+        $data['bidans'] = Bidan::all();
 
-        dd('ini data bidan');
+        return view('admin.bidan.dataBidan', $data);
     }
 
     public function showPasien(){

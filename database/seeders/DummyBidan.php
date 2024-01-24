@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\Bidan;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class DummyUser extends Seeder
+class DummyBidan extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,16 +15,15 @@ class DummyUser extends Seeder
     {
         $userData = [
             [
-                'name' => 'admin',
-                'username' => 'admin',
-                'role' => 'admin',
+                'name' => 'Siti',
+                'username' => 'bidan',
+                'alamat' => 'Kuripan',
                 'password' => bcrypt('12345')
             ],
         ];
 
         foreach ($userData as $key => $val) {
-            User::create($val);
+            Bidan::create($val);
         }
-
     }
 }

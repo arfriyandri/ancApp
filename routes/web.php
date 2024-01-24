@@ -25,18 +25,25 @@ Route::middleware(['guest']) -> group(
             function(){
                 Route::get('/login', 'login') -> name('login');
                 Route::post('/loginProcess', 'loginProcess') -> name('loginProcess');
-                Route::get('/verifikasi', 'verifikasi') -> name('verifikasi');
             }
         );
     }
 );
 
-Route::middleware(['auth']) -> group(
+Route::middleware(['auth:admin']) -> group(
     function(){
         Route::get('/admin',[adminController::class, 'index']) -> name('index');
         Route::get('/admin/bidan',[adminController::class, 'showBidan']) -> name('showBidan');
         Route::get('/admin/pasien',[adminController::class, 'showPasien']) -> name('showPasien');
         Route::get('/admin/materi',[adminController::class, 'showMateri']) -> name('showMateri');
+
+        Route::get('/admin/logout',[authController::class, 'logout']);
+    }
+);
+
+Route::middleware(['auth:bidan']) -> group(
+    function(){
+        // dd('bidan');
     }
 );
 
