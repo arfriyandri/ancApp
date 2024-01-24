@@ -17,6 +17,7 @@ class Bidan extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+
     /**
      * The attributes that are mass assignable.
      *
@@ -24,6 +25,7 @@ class Bidan extends Authenticatable
      */
     protected $fillable = [
         'id',
+        'name',
         'username',
         'password',
         'alamat',

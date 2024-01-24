@@ -24,7 +24,7 @@
             </nav>
             <!-- .navbar -->
 
-            <a href="/login" class="appointment-btn scrollto"><span class="d-none d-md-inline"></span>Masuk</a>
+            <a href="/auth/login" class="appointment-btn scrollto"><span class="d-none d-md-inline"></span>Masuk</a>
         </div>
     </header>
     <!-- End Header -->

@@ -8,7 +8,7 @@
             <div class="logo-authe">
                     <img src="{{asset('template/assets/img/logo.jpeg')}}" alt="">
                 </div>
-                <form class="login100-form validate-form" method="POST" action="/loginProcess">
+                <form class="login100-form validate-form" method="POST" action="/auth/loginProcess">
                     @csrf
 					<span class="login100-form-title p-b-16">
 						Silakan Masuk

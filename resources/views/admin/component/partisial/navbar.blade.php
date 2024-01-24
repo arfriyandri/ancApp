@@ -15,8 +15,8 @@
                     ANC
                 </div>
             </li>
-            <li class="{{ Route::currentRouteName() == 'index' ? 'active' : '' }}">
-                <a href="/index-admin">
+            <li class="{{ Route::currentRouteName() == 'admin.index' ? 'active' : '' }}">
+                <a href="/admin">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-house-fill" viewBox="0 0 16 16">
                         <path
@@ -26,7 +26,7 @@
                     <span class="nav-label" style="margin-left: 6px">Dashboard</span>
                 </a>
             </li>
-            <li class="{{ Route::currentRouteName() == 'showBidan' ? 'active' : '' }}">
+            <li class="{{ Route::currentRouteName() == 'bidan.index' || Route::currentRouteName() == 'bidan.create' || Route::currentRouteName() == 'bidan.edit' ? 'active' : '' }}">
                 <a href="/admin/bidan">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-file-earmark-medical-fill" viewBox="0 0 16 16">

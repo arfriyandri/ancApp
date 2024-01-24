@@ -52,8 +52,14 @@
                                                 <td>{{ $d -> alamat}}</td>
                                                 <td>
                                                     <div class="row justify-content-center">
-                                                        <a href="/admin/update/{{ $d -> id }}" class="btn btn-info" style="margin: 6px"> <i class="fa fa-edit" title="edit"></i> </a>
-                                                        <a href="/hapusDataBidan/{{ $d -> id }}" class="btn btn-danger" style="margin: 6px"> <i class="fa fa-trash" title="hapus"></i> </a>
+                                                        <a href="/admin/bidan/{{ $d -> id }}/edit" class="btn btn-info" style="margin: 6px"> <i class="fa fa-edit" title="edit"></i> </a>
+                                                        <form action="/admin/bidan/{{ $d -> id }}" method="POST">
+                                                            @method('DELETE')
+                                                            @csrf
+                                                            <button class="btn btn-danger" style="margin: 6px">
+                                                                <i class="fa fa-trash" title="hapus"></i></a>
+                                                            </button>
+                                                        </form>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -62,7 +68,7 @@
                                     </table>
                                 </div>
                                 <div class="d-flex" style="padding-left: 15px">
-                                    <a href="/tambahdata-bidan" class="btn">Tambah data</a>
+                                    <a href="/admin/bidan/create" class="btn">Tambah data</a>
                                 </div>
                             </div>
                         </div>

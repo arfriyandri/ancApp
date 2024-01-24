@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\index;
+use App\Http\Controllers\indexController;
 use App\Http\Controllers\authController;
 use App\Http\Controllers\adminController;
+use App\Http\Controllers\bidanController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,23 +18,31 @@ use App\Http\Controllers\adminController;
 Route::get('/home',[authController::class, 'logout']) -> name('home');
 Route::get('/logout',[authController::class, 'logout']);
 
-Route::middleware(['guest']) -> group(
-    function(){
-        Route::get('/',[index::class, 'index']) -> name('index');
+Route::middleware(['guest'])->group(function () {
+    // Rute untuk pengguna yang tidak terotentikasi
+    Route::get('/', [IndexController::class, 'index'])->name('index');
 
-        Route::controller(authController::class) -> group(
+    // Rute untuk otentikasi
+    Route::prefix('auth')->group(function () {
+        Route::get('/login', [AuthController::class, 'login'])->name('login');
+        Route::post('/loginProcess', [AuthController::class, 'loginProcess'])->name('loginProcess');
+    });
+});
+
+Route::middleware(['admin']) -> group(
+    function(){
+        Route::get('/admin',[adminController::class, 'index']) -> name('admin.index');
+
+        Route::prefix('/admin/bidan/') -> group(
             function(){
-                Route::get('/login', 'login') -> name('login');
-                Route::post('/loginProcess', 'loginProcess') -> name('loginProcess');
-            }
-        );
-    }
-);
+                Route::get(' ',[bidanController::class, 'index']) -> name('bidan.index');
+                Route::get('create',[bidanController::class, 'create']) -> name('bidan.create');
+                Route::post(' ',[bidanController::class, 'store']) -> name('bidan.store');
+                Route::get('{id}edit',[bidanController::class, 'edit']) -> name('bidan.edit');
+                Route::put('{id}',[bidanController::class, 'update']) -> name('bidan.update');
+                Route::delete('{id}',[bidanController::class, 'destroy']) -> name('bidan.destroy');
+            });
 
-Route::middleware(['auth:admin']) -> group(
-    function(){
-        Route::get('/admin',[adminController::class, 'index']) -> name('index');
-        Route::get('/admin/bidan',[adminController::class, 'showBidan']) -> name('showBidan');
         Route::get('/admin/pasien',[adminController::class, 'showPasien']) -> name('showPasien');
         Route::get('/admin/materi',[adminController::class, 'showMateri']) -> name('showMateri');
 
@@ -41,7 +50,7 @@ Route::middleware(['auth:admin']) -> group(
     }
 );
 
-Route::middleware(['auth:bidan']) -> group(
+Route::middleware(['bidan']) -> group(
     function(){
         // dd('bidan');
     }

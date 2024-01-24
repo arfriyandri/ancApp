@@ -38,7 +38,7 @@ class authController extends Controller
         }
 
         else{
-            return redirect('/login');
+            return redirect('/auth/login');
         }
 
 
