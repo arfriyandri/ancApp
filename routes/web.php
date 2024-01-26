@@ -5,6 +5,9 @@ use App\Http\Controllers\indexController;
 use App\Http\Controllers\authController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\bidanController;
+use App\Http\Controllers\pasienController;
+use App\Http\Controllers\rekamMedisController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,17 +36,27 @@ Route::middleware(['admin']) -> group(
     function(){
         Route::get('/admin',[adminController::class, 'index']) -> name('admin.index');
 
-        Route::prefix('/admin/bidan/') -> group(
+        Route::prefix('/admin/bidan') -> group(
             function(){
-                Route::get(' ',[bidanController::class, 'index']) -> name('bidan.index');
+                Route::get('/',[bidanController::class, 'index']) -> name('bidan.index');
                 Route::get('create',[bidanController::class, 'create']) -> name('bidan.create');
-                Route::post(' ',[bidanController::class, 'store']) -> name('bidan.store');
+                Route::post('/',[bidanController::class, 'store']) -> name('bidan.store');
                 Route::get('{id}edit',[bidanController::class, 'edit']) -> name('bidan.edit');
                 Route::put('{id}',[bidanController::class, 'update']) -> name('bidan.update');
                 Route::delete('{id}',[bidanController::class, 'destroy']) -> name('bidan.destroy');
             });
 
-        Route::get('/admin/pasien',[adminController::class, 'showPasien']) -> name('showPasien');
+        Route::prefix('/admin/pasien') -> group(
+            function(){
+                Route::get('/',[pasienController::class, 'index']) -> name('pasien.index');
+            }
+        );
+
+        Route::prefix('/admin/pasien/{id}/rekamMedis') -> group(
+            function(){
+                Route::get('/',[rekamMedisController::class, 'index']) -> name('pasien.index');
+            }
+        );
         Route::get('/admin/materi',[adminController::class, 'showMateri']) -> name('showMateri');
 
         Route::get('/admin/logout',[authController::class, 'logout']);

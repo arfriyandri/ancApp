@@ -12,13 +12,13 @@
 
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>{{$title}}</h2>
+                    <h2>{{$data['title']}}</h2>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
                             <a href="/admin">Dashboard</a>
                         </li>
                         <li class="breadcrumb-item active">
-                            <strong>Data Bidan</strong>
+                            <strong>Data Pasien</strong>
                         </li>
                     </ol>
                 </div>
@@ -36,39 +36,35 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>NIP</th>
                                                 <th>Nama</th>
+                                                <th>NIK</th>
                                                 <th>Alamat</th>
-                                                <th>Aksi</th>
+                                                <th>Pekerjaan</th>
+                                                <th>Umur</th>
+                                                <th>Agama</th>
+                                                <th>Tinggi Badan</th>
+                                                <th>Nomor HP</th>
+                                                <th>Bidan</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ( $bidans as $d )
+                                            @foreach ( $data['pasiens'] as $d )
                                             <tr class="gradeX">
                                                 {{-- ganti pake nomor --}}
                                                 <td>{{ $loop -> iteration}}</td>
+                                                <td><a href="/admin/pasien/{{ $d -> id }}/rekamMedis">{{ $d -> name}}</a></td>
                                                 <td>{{ $d -> username}}</td>
-                                                <td>{{ $d -> name}}</td>
                                                 <td>{{ $d -> alamat}}</td>
-                                                <td>
-                                                    <div class="row justify-content-center">
-                                                        <a href="/admin/bidan/{{ $d -> id }}/edit" class="btn btn-info" style="margin: 6px"> <i class="fa fa-edit" title="edit"></i> </a>
-                                                        <form action="/admin/bidan/{{ $d -> id }}" method="POST">
-                                                            @method('DELETE')
-                                                            @csrf
-                                                            <button class="btn btn-danger" style="margin: 6px">
-                                                                <i class="fa fa-trash" title="hapus"></i></a>
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </td>
+                                                <td>{{ $d -> pekerjaan}}</td>
+                                                <td>{{ $d -> umur}}</td>
+                                                <td>{{ $d -> agama}}</td>
+                                                <td>{{ $d -> tinggi_badan}}</td>
+                                                <td>{{ $d -> nomor_hp}}</td>
+                                                <td>{{ $d -> bidan -> name}}</td>
                                             </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
-                                </div>
-                                <div class="d-flex" style="padding-left: 15px">
-                                    <a href="/admin/bidan/create" class="btn">Tambah data</a>
                                 </div>
                             </div>
                         </div>

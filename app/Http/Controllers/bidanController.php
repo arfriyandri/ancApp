@@ -8,14 +8,14 @@ use App\Models\Bidan;
 class bidanController extends Controller
 {
     public function index(){
-        $data['tittle'] = 'Data Bidan';
+        $data['title'] = 'Data Bidan';
         $data['bidans'] = Bidan::all();
 
         return view('admin.bidan.index', $data);
     }
 
     public function create(){
-        $data['tittle'] = "Data Bidan";
+        $data['title'] = "Data Bidan";
 
         return view('admin.bidan.create', $data);
     }
@@ -42,7 +42,7 @@ class bidanController extends Controller
     }
 
     public function edit($id){
-        $data['tittle'] = 'Data Bidan';
+        $data['title'] = 'Data Bidan';
         $data['bidans'] = Bidan::find($id);
 
         return view('admin.bidan.edit', $data);

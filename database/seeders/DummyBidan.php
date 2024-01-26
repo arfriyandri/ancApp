@@ -20,6 +20,12 @@ class DummyBidan extends Seeder
                 'alamat' => 'Kuripan',
                 'password' => bcrypt('12345')
             ],
+            [
+                'name' => 'Nur',
+                'username' => '123',
+                'alamat' => 'Kuripan',
+                'password' => bcrypt('12345')
+            ],
         ];
 
         foreach ($userData as $key => $val) {
