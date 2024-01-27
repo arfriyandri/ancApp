@@ -36,7 +36,7 @@
                     <span class="nav-label" style="margin-left: 6px">Data Bidan</span>
                 </a>
             </li>
-            <li class="{{ Route::currentRouteName() == 'showPasien' ? 'active' : '' }}">
+            <li class="{{ Route::currentRouteName() == 'pasien.index' || Route::currentRouteName() == 'rekam.index' ? 'active' : '' }}">
                 <a href="/admin/pasien">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-people-fill" viewBox="0 0 16 16">

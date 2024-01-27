@@ -7,6 +7,8 @@ use App\Http\Controllers\adminController;
 use App\Http\Controllers\bidanController;
 use App\Http\Controllers\pasienController;
 use App\Http\Controllers\rekamMedisPasienController;
+use App\Http\Controllers\jadwalPasienController;
+use App\Http\Controllers\materiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,12 +51,13 @@ Route::middleware(['admin']) -> group(
         Route::prefix('/admin/pasien') -> group(
             function(){
                 Route::get('/',[pasienController::class, 'index']) -> name('pasien.index');
+                Route::get('/{id}/rekamMedisPasien',[adminController::class, 'rekam.index']) -> name('rekamMedis.index');
             }
         );
 
-        Route::prefix('/admin/pasien/{id}/rekamMedisPasien') -> group(
+        Route::prefix('/admin/materi') -> group(
             function(){
-                Route::get('/',[rekamMedisPasienController::class, 'index']) -> name('rekamMedisPasien.index');
+                Route::get('/',[materiController::class,'index']) -> name('materi.index');
             }
         );
     }

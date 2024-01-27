@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Bidan;
+use App\Models\Pasien;
+use App\Models\RekamMedisPasien;
+use App\Models\JadwalPasien;
 
 class adminController extends Controller
 {
@@ -12,24 +13,11 @@ class adminController extends Controller
         return view('admin.index');
     }
 
-    public function showBidan(){
-        $data['tittle'] = 'Data Bidan';
-        $data['bidans'] = Bidan::all();
+    public function indexRekam($id){
+        $data['rekam_medis'] = RekamMedisPasien::where('id_pasiens',$id) -> get();
+        $data['jadwal'] = JadwalPasien::where('id_pasiens',$id) -> get();
+        $data['pasiens'] = Pasien::where('id',$id) -> get();
 
-        return view('admin.bidan.dataBidan', $data);
-    }
-
-    public function showPasien(){
-        // $data['tittle'] = 'Data Bidan';
-        // $data['bidans'] = Bidan::all();
-
-        dd('ini data pasien');
-    }
-
-    public function showMateri(){
-        // $data['tittle'] = 'Data Bidan';
-        // $data['bidans'] = Bidan::all();
-
-        dd('ini data materi');
+        return view('admin.pasien.rekamMedisPasien.index', compact('data'));
     }
 }

@@ -15,9 +15,9 @@ class DummyPasien extends Seeder
     {
         $userData = [
             [
-                'id_bidan' => '1',
-                'name' => 'Jahora',
-                'username' => '5272',
+                'id_bidans' => '3',
+                'name' => 'Maesyarah',
+                'username' => '222',
                 'password' => bcrypt('12345'),
                 'alamat' => 'Kuripan',
                 'pekerjaan' => 'IRT',

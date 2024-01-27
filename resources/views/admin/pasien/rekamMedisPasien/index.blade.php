@@ -12,13 +12,15 @@
 
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>{{$data['title']}}</h2>
+                    <h2>Data @foreach ( $data['pasiens'] as $d )
+                        {{ $d -> name }}
+                    @endforeach</h2>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
                             <a href="/admin">Dashboard</a>
                         </li>
-                        <li class="breadcrumb-item active">
-                            <strong>Data Pasien</strong>
+                        <li class="breadcrumb-item">
+                            <a href="/admin/pasien">Data Pasien</a>
                         </li>
                     </ol>
                 </div>
@@ -31,6 +33,7 @@
                     <div class="col-lg-12">
                         <div class="ibox ">
                             <div class="ibox-content">
+                                <h2>Rekam Medis</h2>
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered table-hover dataTables-example">
                                         <thead>
@@ -57,6 +60,38 @@
                                                 <td>{{ $d -> uk}}</td>
                                                 <td>{{ $d -> hb}}</td>
                                                 <td>{{ $d -> created_at}}</td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="ibox ">
+                            <div class="ibox-content">
+                                <h2>Jadwal Kunjungan</h2>
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Tanggal</th>
+                                                <th>Waktu</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ( $data['jadwal'] as $d )
+                                            <tr class="gradeX">
+                                                {{-- ganti pake nomor --}}
+                                                <td>{{ $loop -> iteration}}</td>
+                                                <td>{{ $d -> tanggal }}</td>
+                                                <td>{{ $d -> waktu}}</td>
                                             </tr>
                                             @endforeach
                                         </tbody>
