@@ -36,31 +36,27 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Nama</th>
-                                                <th>NIK</th>
-                                                <th>Alamat</th>
-                                                <th>Pekerjaan</th>
-                                                <th>Umur</th>
-                                                <th>Agama</th>
-                                                <th>Tinggi Badan</th>
-                                                <th>Nomor HP</th>
-                                                <th>Bidan</th>
+                                                <th>Berat Badan</th>
+                                                <th>Jumlah Janin</th>
+                                                <th>Keluhan</th>
+                                                <th>TFU</th>
+                                                <th>Umur Kandungan (Mgg)</th>
+                                                <th>HB (mg/dL)</th>
+                                                <th>Tanggal Pemeriksaan</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ( $data['pasiens'] as $d )
+                                            @foreach ( $data['rekam_medis'] as $d )
                                             <tr class="gradeX">
                                                 {{-- ganti pake nomor --}}
                                                 <td>{{ $loop -> iteration}}</td>
-                                                <td><a href="/admin/pasien/{{ $d -> id }}/rekamMedisPasien">{{ $d -> name}}</a></td>
-                                                <td>{{ $d -> username}}</td>
-                                                <td>{{ $d -> alamat}}</td>
-                                                <td>{{ $d -> pekerjaan}}</td>
-                                                <td>{{ $d -> umur}}</td>
-                                                <td>{{ $d -> agama}}</td>
-                                                <td>{{ $d -> tinggi_badan}}</td>
-                                                <td>{{ $d -> nomor_hp}}</td>
-                                                <td>{{ $d -> bidan -> name}}</td>
+                                                <td>{{ $d -> berat_badan }}</td>
+                                                <td>{{ $d -> jumlah_janin}}</td>
+                                                <td>{{ $d -> keluhan}}</td>
+                                                <td>{{ $d -> tfu}}</td>
+                                                <td>{{ $d -> uk}}</td>
+                                                <td>{{ $d -> hb}}</td>
+                                                <td>{{ $d -> created_at}}</td>
                                             </tr>
                                             @endforeach
                                         </tbody>

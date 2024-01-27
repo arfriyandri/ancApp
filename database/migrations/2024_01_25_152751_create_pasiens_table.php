@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('pasiens', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_bidan')->constrained('bidans');
+            $table->foreignId('id_bidans')->constrained('bidans');
             $table->string('name'); //Nama Lengkap
             $table->string('username'); //NIK
             $table->string('password');
