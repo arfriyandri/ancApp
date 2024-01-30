@@ -1,5 +1,9 @@
 @include('component.head')
 
+<title>
+    {{ $title }}
+</title>
+
 <body>
     <!-- ======= Top Bar ======= -->
     <div id="topbar" class="d-flex align-items-center fixed-top">

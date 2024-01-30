@@ -51,4 +51,9 @@ class Bidan extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function pasiens()
+    {
+        return $this->hasMany(Pasien::class, 'id_bidans', 'id');
+    }
+
 }

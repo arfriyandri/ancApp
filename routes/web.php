@@ -36,28 +36,39 @@ Route::middleware(['guest'])->group(function () {
 
 Route::middleware(['admin']) -> group(
     function(){
-        Route::get('/admin',[adminController::class, 'index']) -> name('admin.index');
-
-        Route::prefix('/admin/bidan') -> group(
+        Route::prefix('/admin') -> group(
             function(){
-                Route::get('/',[bidanController::class, 'index']) -> name('bidan.index');
-                Route::get('create',[bidanController::class, 'create']) -> name('bidan.create');
-                Route::post('/',[bidanController::class, 'store']) -> name('bidan.store');
-                Route::get('{id}edit',[bidanController::class, 'edit']) -> name('bidan.edit');
-                Route::put('{id}',[bidanController::class, 'update']) -> name('bidan.update');
-                Route::delete('{id}',[bidanController::class, 'destroy']) -> name('bidan.destroy');
-            });
+                Route::get('/',[adminController::class, 'index']) -> name('admin.index');
+                Route::get('/logout',[authController::class, 'logout']);
 
-        Route::prefix('/admin/pasien') -> group(
-            function(){
-                Route::get('/',[pasienController::class, 'index']) -> name('pasien.index');
-                Route::get('/{id}/rekamMedisPasien',[adminController::class, 'rekam.index']) -> name('rekamMedis.index');
-            }
-        );
+                Route::prefix('/bidan') -> group(
+                    function(){
+                        Route::get('/',[bidanController::class, 'index']) -> name('bidan.index');
+                        Route::get('create',[bidanController::class, 'create']) -> name('bidan.create');
+                        Route::post('/',[bidanController::class, 'store']) -> name('bidan.store');
+                        Route::get('{id}/edit',[bidanController::class, 'edit']) -> name('bidan.edit');
+                        Route::put('{id}',[bidanController::class, 'update']) -> name('bidan.update');
+                        Route::delete('{id}',[bidanController::class, 'destroy']) -> name('bidan.destroy');
+                    }
+                );
 
-        Route::prefix('/admin/materi') -> group(
-            function(){
-                Route::get('/',[materiController::class,'index']) -> name('materi.index');
+                Route::prefix('/pasien') -> group(
+                    function(){
+                        Route::get('/',[pasienController::class, 'index']) -> name('pasien.index');
+                        Route::get('/{id}/rekamMedisPasien',[adminController::class, 'indexRekam']) -> name('rekamMedis.index');
+                    }
+                );
+
+                Route::prefix('/materi') -> group(
+                    function(){
+                        Route::get('/',[materiController::class,'index']) -> name('materi.index');
+                        Route::get('create',[materiController::class,'create']) -> name('materi.create');
+                        Route::post('/',[materiController::class, 'store']) -> name('materi.store');
+                        Route::get('{id}/edit',[materiController::class, 'edit']) -> name('materi.edit');
+                        Route::put('{id}',[materiController::class, 'update']) -> name('materi.update');
+                        Route::delete('{id}',[materiController::class, 'destroy']) -> name('bidan.destroy');
+                    }
+                );
             }
         );
     }
@@ -65,7 +76,14 @@ Route::middleware(['admin']) -> group(
 
 Route::middleware(['bidan']) -> group(
     function(){
-        // dd('bidan');
+
+        Route::prefix('/bidan') -> group(
+            function(){
+                Route::get('/pasien',[pasienController::class, 'indexBidan']) -> name('pasien.index');
+                Route::get('/logout',[authController::class, 'logout']);
+            }
+        );
+
     }
 );
 

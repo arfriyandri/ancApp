@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 class indexController extends Controller
 {
     public function index(){
-        return view('home');
+        $data['title'] = "Antenatal Care";
+
+        return view('home', $data);
     }
 
     public function indexOnLogin(){

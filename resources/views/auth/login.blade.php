@@ -1,5 +1,9 @@
 @include('auth.component.head')
 
+<title>
+    {{ $title }}
+</title>
+
 <body style="border-radius: 8px">
 
 	<div class="limiter">

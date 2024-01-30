@@ -9,11 +9,9 @@ use Illuminate\Support\Facades\Auth;
 class authController extends Controller
 {
     public function login(){
-        return view('auth.login');
-    }
+        $data['title'] = "Login";
 
-    public function verifikasi(){
-        dd('verifikasi');
+        return view('auth.login',$data);
     }
 
     public function loginProcess(Request $request){
@@ -34,28 +32,12 @@ class authController extends Controller
 
         else if (Auth::guard('bidan')->attempt($data)) {
             // Logika setelah autentikasi berhasil
-            dd('bidan');
+            return redirect('/bidan/pasien');
         }
 
         else{
             return redirect('/auth/login');
         }
-
-
-        // if (Auth::attempt($data)) {
-        //     if(Auth::admin() -> role == 'admin'){
-        //         dd('admin new');
-        //         // return redirect('/admin');
-        //     } else if(Auth::user() -> role == 'bidan') {
-        //         dd('hai bidan');
-        //     } else if(Auth::user() -> role == 'pasien'){
-        //         dd('hai pasien');
-        //     } else {
-        //         dd(Auth::admin());
-        //     }
-        // } else {
-        //     // return redirect('/login');
-        // }
     }
 
     public function logout(){
