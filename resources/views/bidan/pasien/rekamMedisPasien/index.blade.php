@@ -1,31 +1,28 @@
-@include('admin.component.head')
+@include('bidan.component.head')
 
 <body>
     <div id="wrapper">
-        @include('admin.component.partisial.navbar')
+        @include('bidan.component.partisial.navbar')
 
         <div id="page-wrapper" class="gray-bg">
 
             <header>
-                @include('admin.component.partisial.header')
+                @include('bidan.component.partisial.header')
             </header>
 
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>Data @foreach ( $data['pasiens'] as $d )
-                        {{ $d -> name }}
-                    @endforeach</h2>
+                    <h2>{{ $data['title'] }} @foreach ( $data['pasiens'] as $d ){{ $d -> name }}@endforeach</h2>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
-                            <a href="/admin">Dashboard</a>
+                            <a href="/bidan/pasien">Data Pasien</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="/admin/pasien">Data Pasien</a>
+                            <strong>Data Rekam Medis</strong>
                         </li>
                     </ol>
                 </div>
                 <div class="col-lg-2">
-
                 </div>
             </div>
             <div class="wrapper wrapper-content animated fadeInRight">
@@ -46,6 +43,7 @@
                                                 <th>Umur Kandungan (Minggu)</th>
                                                 <th>HB (mg/dL)</th>
                                                 <th>Tanggal Pemeriksaan</th>
+                                                <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -60,10 +58,27 @@
                                                 <td>{{ $d -> uk}}</td>
                                                 <td>{{ $d -> hb}}</td>
                                                 <td>{{ $d -> created_at}}</td>
+                                                <td>
+                                                    <div class="row justify-content-center">
+                                                    <a href="/bidan/pasien/@foreach ( $data['pasiens'] as $value ){{ $value -> id }}@endforeach/rekamMedisPasien/{{ $d -> id }}/edit" class="btn btn-info" style="margin: 6px">
+                                                        <i class="fa fa-edit" title="edit"></i>
+                                                    </a>
+                                                    <form action="/bidan/pasien/@foreach ( $data['pasiens'] as $value ){{ $value -> id }}@endforeach/rekamMedisPasien/{{ $d -> id }}" method="POST">
+                                                        @method('DELETE')
+                                                        @csrf
+                                                        <button class="btn btn-danger" style="margin: 6px">
+                                                            <i class="fa fa-trash" title="hapus"></i></a>
+                                                        </button>
+                                                    </form>
+                                                    </div>
+                                                </td>
                                             </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
+                                </div>
+                                <div class="d-flex" style="padding-left: 15px">
+                                    <a href="/bidan/pasien/@foreach( $data['pasiens'] as $d ){{ $d -> id }}@endforeach/rekamMedisPasien/create" class="btn">Tambah data</a>
                                 </div>
                             </div>
                         </div>
@@ -75,7 +90,7 @@
                     <div class="col-lg-12">
                         <div class="ibox ">
                             <div class="ibox-content">
-                                <h2>Jadwal Kunjungan</h2>
+                                <h2>Jadwal</h2>
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered table-hover dataTables-example">
                                         <thead>
@@ -83,19 +98,37 @@
                                                 <th>No</th>
                                                 <th>Tanggal</th>
                                                 <th>Waktu</th>
+                                                <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ( $data['jadwal'] as $d )
+                                            @foreach ( $data['jadwals'] as $d )
                                             <tr class="gradeX">
                                                 {{-- ganti pake nomor --}}
                                                 <td>{{ $loop -> iteration}}</td>
                                                 <td>{{ $d -> tanggal }}</td>
                                                 <td>{{ $d -> waktu}}</td>
+                                                <td>
+                                                    <div class="row justify-content-center">
+                                                        <a hidden href="/bidan/pasien/@foreach ( $data['pasiens'] as $value ){{ $value -> id }}@endforeach/rekamMedisPasien/{{ $d -> id }}/edit" class="btn btn-info" style="margin: 6px">
+                                                            <i class="fa fa-edit" title="edit"></i>
+                                                        </a>
+                                                        <form action="/bidan/pasien/@foreach ( $data['pasiens'] as $value ){{ $value -> id }}@endforeach/jadwalPasien/{{ $d -> id }}" method="POST">
+                                                            @method('DELETE')
+                                                            @csrf
+                                                            <button class="btn btn-danger" style="margin: 6px">
+                                                                <i class="fa fa-trash" title="hapus"></i></a>
+                                                            </button>
+                                                        </form>
+                                                        </div>
+                                                </td>
                                             </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
+                                </div>
+                                <div class="d-flex" style="padding-left: 15px">
+                                    <a href="/bidan/pasien/@foreach( $data['pasiens'] as $d ){{ $d -> id }}@endforeach/rekamMedisPasien/create" class="btn">Tambah data</a>
                                 </div>
                             </div>
                         </div>
@@ -105,7 +138,7 @@
         </div>
     </div>
 </body>
-@include('admin.component.foot')
+@include('bidan.component.foot')
 <script>
     $(document).ready(function() {
         $('.dataTables-example').DataTable({

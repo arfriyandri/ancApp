@@ -14,9 +14,6 @@
                 <div class="col-lg-10">
                     <h2>{{$data['title']}}</h2>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            <a href="/admin">Dashboard</a>
-                        </li>
                         <li class="breadcrumb-item active">
                             <strong>Data Pasien</strong>
                         </li>
@@ -43,6 +40,7 @@
                                                 <th>Agama</th>
                                                 <th>Tinggi Badan</th>
                                                 <th>Nomor HP</th>
+                                                <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -50,7 +48,7 @@
                                             <tr class="gradeX">
                                                 {{-- ganti pake nomor --}}
                                                 <td>{{ $loop -> iteration}}</td>
-                                                <td><a href="/admin/pasien/{{ $d -> id }}/rekamMedisPasien">{{ $d -> name}}</a></td>
+                                                <td><a href="/bidan/pasien/{{ $d -> id }}/rekamMedisPasien">{{ $d -> name}}</a></td>
                                                 <td>{{ $d -> username}}</td>
                                                 <td>{{ $d -> alamat}}</td>
                                                 <td>{{ $d -> pekerjaan}}</td>
@@ -58,13 +56,27 @@
                                                 <td>{{ $d -> agama}}</td>
                                                 <td>{{ $d -> tinggi_badan}}</td>
                                                 <td>{{ $d -> nomor_hp}}</td>
+                                                <td>
+                                                    <div class="row justify-content-center">
+                                                        <a href="/bidan/pasien/{{ $d -> id }}/edit" class="btn btn-info" style="margin: 6px">
+                                                            <i class="fa fa-edit" title="edit"></i>
+                                                        </a>
+                                                        <form action="/bidan/pasien/{{ $d -> id }}" method="POST">
+                                                            @method('DELETE')
+                                                            @csrf
+                                                            <button class="btn btn-danger" style="margin: 6px">
+                                                                <i class="fa fa-trash" title="hapus"></i></a>
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </td>
                                             </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
                                 </div>
                                 <div class="d-flex" style="padding-left: 15px">
-                                    <a href="/admin/bidan/create" class="btn">Tambah data</a>
+                                    <a href="pasien/create" class="btn">Tambah data</a>
                                 </div>
                             </div>
                         </div>

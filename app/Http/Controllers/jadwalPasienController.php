@@ -2,17 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\JadwalPasien;
+use App\Models\RekamMedisPasien;
 use App\Models\Pasien;
+use App\Models\JadwalPasien;
 use Illuminate\Http\Request;
+use App\Models\Bidan;
+use Illuminate\Support\Facades\Auth;
 
 class jadwalPasienController extends Controller
 {
-    // public function index($id){
-    //     $data['title'] = 'Data Jadwal Kunjungan';
-    //     $data['jadwal'] = JadwalPasien::where('id_pasiens',$id) -> get();
-    //     $data['pasiens'] = Pasien::where('id',$id) -> get();
+    public function destroy($id,$id_jadwal){
+        $data['title'] = "Data Pasien";
+        JadwalPasien::find($id_jadwal) -> delete();
 
-    //     return view('admin.pasien.jadwalPasien.index', compact('data'));
-    // }
+        $bidanId = Auth::guard('bidan')->id();
+        $data['pasiens'] = Bidan::find($bidanId) -> pasiens;
+
+        $data['rekam_medis'] = RekamMedisPasien::where('id_pasiens',$id) -> get();
+        $data['jadwals'] = JadwalPasien::where('id_pasiens',$id) -> get();
+
+        return view('bidan.pasien.rekamMedisPasien.index', compact('data'));
+    }
 }

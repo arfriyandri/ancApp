@@ -18,11 +18,7 @@ class RekamMedisPasien extends Model
         'keluhan',
         'tfu',
         'uk',
-        'pap',
         'hb',
-        'lila',
-        'tm',
-        'tanggal_pemeriksaan',
     ];
 
     public function pasien()

@@ -79,7 +79,34 @@ Route::middleware(['bidan']) -> group(
 
         Route::prefix('/bidan') -> group(
             function(){
-                Route::get('/pasien',[pasienController::class, 'indexBidan']) -> name('pasien.index');
+                Route::prefix('/pasien') -> group(
+                    function(){
+                        Route::get('/',[pasienController::class, 'indexBidan']) -> name('pasien.index');
+                        Route::get('create',[pasienController::class, 'create']) -> name('pasien.create');
+                        Route::post('/',[pasienController::class, 'store']) -> name('pasien.store');
+                        Route::get('{id}/edit',[pasienController::class, 'edit']) -> name('pasien.edit');
+                        Route::put('{id}',[pasienController::class, 'update']) -> name('pasien.update');
+                        Route::delete('{id}',[pasienController::class, 'destroy']) -> name('pasien.destroy');
+
+
+                        Route::prefix('/{id}/rekamMedisPasien') -> group(
+                            function(){
+                                Route::get('/',[rekamMedisPasienController::class, 'indexRekam']) -> name('rekamMedis.index');
+                                Route::get('create',[rekamMedisPasienController::class, 'create']) -> name('rekamMedis.create');
+                                Route::post('/',[rekamMedisPasienController::class, 'store']) -> name('rekamMedis.store');
+                                Route::get('{id_rekamMedis}/edit',[rekamMedisPasienController::class, 'edit']) -> name('rekamMedis.edit');
+                                Route::put('{id_rekamMedis}',[rekamMedisPasienController::class, 'update']) -> name('rekamMedis.update');
+                                Route::delete('{id_rekamMedis}',[rekamMedisPasienController::class, 'destroy']) -> name('rekamMedis.destroy');
+                            }
+                        );
+
+                        Route::prefix('/{id}/jadwalPasien') -> group(
+                            function(){
+                                Route::delete('{id_jadwal}',[jadwalPasienController::class, 'destroy']) -> name('jadwal.destroy');
+                            }
+                        );
+                    }
+                );
                 Route::get('/logout',[authController::class, 'logout']);
             }
         );

@@ -25,7 +25,7 @@ class Pasien extends Authenticatable
      */
     protected $fillable = [
         'id',
-        'id_bidan',
+        'id_bidans',
         'name',
         'username',
         'password',
