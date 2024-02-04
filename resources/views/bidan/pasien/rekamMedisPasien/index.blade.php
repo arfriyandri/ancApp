@@ -110,7 +110,7 @@
                                                 <td>{{ $d -> waktu}}</td>
                                                 <td>
                                                     <div class="row justify-content-center">
-                                                        <a hidden href="/bidan/pasien/@foreach ( $data['pasiens'] as $value ){{ $value -> id }}@endforeach/rekamMedisPasien/{{ $d -> id }}/edit" class="btn btn-info" style="margin: 6px">
+                                                        <a href="/bidan/pasien/@foreach ( $data['pasiens'] as $value ){{ $value -> id }}@endforeach/jadwalPasien/{{ $d -> id }}/edit" class="btn btn-info" style="margin: 6px">
                                                             <i class="fa fa-edit" title="edit"></i>
                                                         </a>
                                                         <form action="/bidan/pasien/@foreach ( $data['pasiens'] as $value ){{ $value -> id }}@endforeach/jadwalPasien/{{ $d -> id }}" method="POST">
@@ -128,7 +128,7 @@
                                     </table>
                                 </div>
                                 <div class="d-flex" style="padding-left: 15px">
-                                    <a href="/bidan/pasien/@foreach( $data['pasiens'] as $d ){{ $d -> id }}@endforeach/rekamMedisPasien/create" class="btn">Tambah data</a>
+                                    <a href="/bidan/pasien/@foreach( $data['pasiens'] as $d ){{ $d -> id }}@endforeach/jadwalPasien/create" class="btn">Tambah data</a>
                                 </div>
                             </div>
                         </div>

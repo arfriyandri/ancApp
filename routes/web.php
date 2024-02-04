@@ -102,6 +102,10 @@ Route::middleware(['bidan']) -> group(
 
                         Route::prefix('/{id}/jadwalPasien') -> group(
                             function(){
+                                Route::get('create',[jadwalPasienController::class, 'create']) -> name('jadwal.create');
+                                Route::post('/',[jadwalPasienController::class, 'store']) -> name('jadwal.store');
+                                Route::get('{id_jadwal}/edit',[jadwalPasienController::class, 'edit']) -> name('jadwal.edit');
+                                Route::put('{id_jadwal}',[jadwalPasienController::class, 'update']) -> name('rekamMedis.update');
                                 Route::delete('{id_jadwal}',[jadwalPasienController::class, 'destroy']) -> name('jadwal.destroy');
                             }
                         );
