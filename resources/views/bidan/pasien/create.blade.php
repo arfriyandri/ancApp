@@ -12,7 +12,7 @@
 
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>{{ $data['title'] }} @foreach ( $data['pasiens'] as $d ){{ $d -> name }}@endforeach</h2>
+                    <h2>{{ $data['title'] }}</h2>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
                             <a href="/bidan/pasien">Data Pasien</a>
@@ -31,11 +31,11 @@
                 <div class="row wrapper border-bottom white-bg page-heading wrapper-content animated fadeInRight">
                     <h2 class="pasien">Tambah Pasien</h2>
                     <div class="container">
-                        <div class="row">
+                        <div class="row" hidden>
                             <div class="col">
                                 <div class="col">
-                                    <div class="" style="margin-left: 90px; margin-top: -30px;" hidden>
-                                        <input type="text" name="id_bidans" class="form-control" value="@foreach ($data['pasiens'] as $d ){{ $d -> bidan -> id }}@endforeach" required>
+                                    <div class="" style="margin-left: 90px; margin-top: -30px;" >
+                                        <input type="text" name="id_bidans" class="form-control" value="{{ $data['bidans'] -> id }}" required>
                                     </div>
                                 </div>
                             </div>

@@ -18,6 +18,7 @@ class jadwalPasienController extends Controller
 
         $bidanId= Auth::guard('bidan')->id();
         $bidan = Bidan::findOrFail($bidanId);
+        $data['bidans'] = Bidan::find($bidanId);
         $pasiens = $bidan->pasiens;
         $data['pasiens'] = $pasiens;
 
@@ -45,6 +46,11 @@ class jadwalPasienController extends Controller
         $data['rekam_medis'] = RekamMedisPasien::where('id_pasiens',$id) -> get();
         $data['jadwals'] = JadwalPasien::where('id_pasiens',$id) -> get();
         $data['pasiens'] = Pasien::where('id',$id) -> get();
+
+        $bidanId= Auth::guard('bidan')->id();
+        $bidan = Bidan::findOrFail($bidanId);
+        $data['bidans'] = Bidan::find($bidanId);
+
 
         return view('bidan.pasien.rekamMedisPasien.index', compact('data'));
 
@@ -80,6 +86,7 @@ class jadwalPasienController extends Controller
         JadwalPasien::find($id_jadwal) -> delete();
 
         $bidanId = Auth::guard('bidan')->id();
+        $data['bidans'] = Bidan::find($bidanId);
         $data['pasiens'] = Bidan::find($bidanId) -> pasiens;
 
         $data['rekam_medis'] = RekamMedisPasien::where('id_pasiens',$id) -> get();

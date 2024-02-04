@@ -14,6 +14,7 @@ class rekamMedisPasienController extends Controller
     public function indexRekam($id){
         $data['title'] = "Data Pasien";
         $bidanId = Auth::guard('bidan')->id();
+        $data['bidans'] = Bidan::find($bidanId);
         $data['pasiens'] = Bidan::find($bidanId) -> pasiens;
 
         $data['rekam_medis'] = RekamMedisPasien::where('id_pasiens',$id) -> get();
@@ -26,6 +27,7 @@ class rekamMedisPasienController extends Controller
         $data['title'] = "Data Pasien";
 
         $bidanId= Auth::guard('bidan')->id();
+        $data['bidans'] = Bidan::find($bidanId);
         $bidan = Bidan::findOrFail($bidanId);
         $pasiens = $bidan->pasiens;
         $data['pasiens'] = $pasiens;
@@ -64,6 +66,10 @@ class rekamMedisPasienController extends Controller
         $data['jadwals'] = JadwalPasien::where('id_pasiens',$id) -> get();
         $data['pasiens'] = Pasien::where('id',$id) -> get();
 
+        $bidanId= Auth::guard('bidan')->id();
+        $data['bidans'] = Bidan::find($bidanId);
+
+
         return view('bidan.pasien.rekamMedisPasien.index', compact('data'));
 
     }
@@ -73,6 +79,7 @@ class rekamMedisPasienController extends Controller
         $data['rekam_medis'] = RekamMedisPasien::find($id_rekamMedis);
 
         $bidanId = Auth::guard('bidan')->id();
+        $data['bidans'] = Bidan::find($bidanId);
         $data['pasiens'] = Bidan::find($bidanId) -> pasiens;
 
         return view('bidan.pasien.rekamMedisPasien.edit', compact('data'));
@@ -106,6 +113,7 @@ class rekamMedisPasienController extends Controller
         RekamMedisPasien::find($id_rekamMedis) -> delete();
 
         $bidanId = Auth::guard('bidan')->id();
+        $data['bidans'] = Bidan::find($bidanId);
         $data['pasiens'] = Bidan::find($bidanId) -> pasiens;
 
         $data['rekam_medis'] = RekamMedisPasien::where('id_pasiens',$id) -> get();

@@ -19,18 +19,15 @@ class pasienController extends Controller
     }
 
     public function indexBidan(){
-
+        $data['title'] = 'Data Pasien';
         $bidanId = Auth::guard('bidan')->id();
 
         // Pastikan bidanId tidak null sebelum menggunakan find
         if ($bidanId !== null) {
             // Menggunakan findOrFail agar menghasilkan 404 jika bidan tidak ditemukan
-            $bidan = Bidan::findOrFail($bidanId);
-
-            // Pastikan bahwa $bidan->pasiens merupakan objek yang valid
-            $pasiens = $bidan-> pasiens;
-
-            $data['title'] = 'Data Pasien';
+            $data['bidans'] = Bidan::findOrFail($bidanId);
+             // Pastikan bahwa $bidan->pasiens merupakan objek yang valid
+            $pasiens = $data['bidans']-> pasiens;
             $data['pasiens'] = $pasiens;
 
             return view('bidan.pasien.index', compact('data'));
@@ -44,8 +41,8 @@ class pasienController extends Controller
         $data['title'] = "Data Pasien";
 
         $bidanId= Auth::guard('bidan')->id();
-        $bidan = Bidan::findOrFail($bidanId);
-        $pasiens = $bidan->pasiens;
+        $data['bidans'] = Bidan::findOrFail($bidanId);
+        $pasiens = $data['bidans']->pasiens;
         $data['pasiens'] = $pasiens;
 
 
@@ -90,8 +87,9 @@ class pasienController extends Controller
         $data['idPasiens'] = Pasien::find($id);
 
         $bidanId= Auth::guard('bidan')->id();
-        $bidan = Bidan::findOrFail($bidanId);
-        $pasiens = $bidan->pasiens;
+        $data['bidans'] = Bidan::findOrFail($bidanId);
+
+        $pasiens = $data['bidans']->pasiens;
         $data['pasiens'] = $pasiens;
 
         return view('bidan.pasien.edit', compact('data'));

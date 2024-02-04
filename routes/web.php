@@ -66,7 +66,7 @@ Route::middleware(['admin']) -> group(
                         Route::post('/',[materiController::class, 'store']) -> name('materi.store');
                         Route::get('{id}/edit',[materiController::class, 'edit']) -> name('materi.edit');
                         Route::put('{id}',[materiController::class, 'update']) -> name('materi.update');
-                        Route::delete('{id}',[materiController::class, 'destroy']) -> name('bidan.destroy');
+                        Route::delete('{id}',[materiController::class, 'destroy']) -> name('materi.destroy');
                     }
                 );
             }
@@ -114,7 +114,7 @@ Route::middleware(['bidan']) -> group(
 
                 Route::prefix('/materi') -> group(
                     function(){
-                        Route::get('/',[materiController::class, 'indexMateri']) -> name('materi.index');
+                        Route::get('/',[materiController::class, 'indexMateri']) -> name('materiBidan.index');
                         // Route::get('create',[pasienController::class, 'create']) -> name('pasien.create');
                         // Route::post('/',[pasienController::class, 'store']) -> name('pasien.store');
                         // Route::get('{id}/edit',[pasienController::class, 'edit']) -> name('pasien.edit');

@@ -8,9 +8,7 @@
                             style="width: 84px" />
                     </div>
                     <div class="d-flex justify-content-center">
-                        @foreach ($data['pasiens'] as $d)
-                        <span style="color: white" class="block m-t-xs font-bold">Bidan {{ $d -> bidan -> name }}</span>
-                        @endforeach
+                        <span style="color: white" class="block m-t-xs font-bold">Bidan {{ $data['bidans'] -> name }}</span>
                     </div>
                 </div>
                 <div class="logo-element">
@@ -26,7 +24,7 @@
                     </svg>
                     <span class="nav-label" style="margin-left: 6px">Data Pasien</span></a>
             </li>
-            <li class="{{ Route::currentRouteName() == 'materi.index' || Route::currentRouteName() == 'materi.create' ? 'active' : '' }}">
+            <li class="{{ Route::currentRouteName() == 'materiBidan.index' ? 'active' : '' }}">
                 <a href="/bidan/materi">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-file-earmark-fill" viewBox="0 0 16 16">
