@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Materi;
+use App\Models\Bidan;
+use Illuminate\Support\Facades\Auth;
 
 class materiController extends Controller
 {
@@ -12,6 +14,26 @@ class materiController extends Controller
         $data['materis'] = Materi::all();
 
         return view('admin.materi.index', compact('data'));
+    }
+
+    public function indexMateri(){
+        $data['title'] = 'Data Materi';
+        $data['materis'] = Materi::all();
+
+        $bidanId = Auth::guard('bidan')->id();
+
+        // Pastikan bidanId tidak null sebelum menggunakan find
+        if ($bidanId !== null) {
+            // Menggunakan findOrFail agar menghasilkan 404 jika bidan tidak ditemukan
+            $bidan = Bidan::findOrFail($bidanId);
+
+            // Pastikan bahwa $bidan->pasiens merupakan objek yang valid
+            $pasiens = $bidan-> pasiens;
+        }
+
+        $data['pasiens'] = $pasiens;
+
+        return view('bidan.materi.index', compact('data'));
     }
 
     public function create(){
