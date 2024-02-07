@@ -11,6 +11,14 @@ use Illuminate\Support\Facades\Auth;
 
 class rekamMedisPasienController extends Controller
 {
+    public function indexPasien(){
+        $pasienId = Auth::guard('pasien') -> id();
+        $data['pasiens'] = Pasien::find($pasienId);
+        $data['rekamMedis'] = RekamMedisPasien::where('id_pasiens',$pasienId) -> get();
+
+        return view('pasien.rekamMedis', compact('data'));
+    }
+
     public function indexRekam($id){
         $data['title'] = "Data Pasien";
         $bidanId = Auth::guard('bidan')->id();

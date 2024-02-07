@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Materi;
 use App\Models\Bidan;
+use App\Models\Pasien;
 use Illuminate\Support\Facades\Auth;
 
 class materiController extends Controller
@@ -14,6 +15,16 @@ class materiController extends Controller
         $data['materis'] = Materi::all();
 
         return view('admin.materi.index', compact('data'));
+    }
+
+    public function indexPasien(){
+        $data['title'] = 'Data Materi';
+        $data['materis'] = Materi::all();
+
+        $pasienId = Auth::guard('pasien')->id();
+        $data['pasiens'] = Pasien::findOrFail($pasienId);
+
+        return view('pasien.index', compact('data'));
     }
 
     public function indexMateri(){

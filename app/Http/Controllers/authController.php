@@ -35,6 +35,10 @@ class authController extends Controller
             return redirect('/bidan/pasien');
         }
 
+        else if (Auth::guard('pasien')->attempt($data)) {
+            return redirect('/pasien');
+        }
+
         else{
             return redirect('/auth/login');
         }

@@ -129,3 +129,14 @@ Route::middleware(['bidan']) -> group(
     }
 );
 
+Route::middleware(['pasien']) -> group(
+    function (){
+        Route::prefix('/pasien') -> group(
+            function (){
+                Route::get('/', [materiController::class, 'indexPasien']) -> name('pasien.index');
+                Route::get('/rekamMedis', [rekamMedisPasienController::class, 'indexPasien']) -> name('pasien.rekamMedis');
+            }
+        );
+    }
+);
+

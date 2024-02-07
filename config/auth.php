@@ -50,6 +50,11 @@ return [
             'driver' => 'session',
             'provider' => 'bidans',
         ],
+
+        'pasien' => [
+            'driver' => 'session',
+            'provider' => 'pasiens',
+        ],
     ],
 
     /*
@@ -83,6 +88,11 @@ return [
         'bidans' => [
             'driver' => 'eloquent',
             'model' => App\Models\Bidan::class,
+        ],
+
+        'pasiens' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Pasien::class,
         ],
 
     ],
@@ -123,6 +133,13 @@ return [
 
         'bidans' => [
             'provider' => 'bidans',
+            'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        'pasiens' => [
+            'provider' => 'pasiens',
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,
