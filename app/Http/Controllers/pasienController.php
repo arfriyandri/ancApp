@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pasien;
 use App\Models\Bidan;
+use App\Models\JadwalPasien;
+use App\Models\Materi;
+use App\Models\RekamMedisPasien;
 use Illuminate\Support\Facades\Auth;
 
 class pasienController extends Controller
@@ -16,6 +19,18 @@ class pasienController extends Controller
 
 
         return view('admin.pasien.index', compact('data'));
+    }
+
+    public function indexPasien(){
+        $data['title'] = 'Antenatal Care';
+        $data['materis'] = Materi::all();
+
+        $pasienId = Auth::guard('pasien')->id();
+        $data['pasiens'] = Pasien::findOrFail($pasienId);
+        $data['rekamMedis'] = RekamMedisPasien::where('id_pasiens', $pasienId) -> get();
+        $data['jadwal'] = JadwalPasien::where('id_pasiens', $pasienId) -> get();
+
+        return view('pasien.index', compact('data'));
     }
 
     public function indexBidan(){
