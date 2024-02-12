@@ -5,6 +5,7 @@
 </title>
 
 <body style="border-radius: 8px">
+    @include('sweetalert::alert')
 
 	<div class="limiter">
 

@@ -9,8 +9,6 @@ class JadwalPasien extends Model
 {
     use HasFactory;
 
-    use HasFactory;
-
     protected $fillable = [
         'id',
         'id_bidans',

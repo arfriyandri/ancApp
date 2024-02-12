@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,20 +28,28 @@ class authController extends Controller
 
         if (Auth::guard('admin')->attempt($data)) {
             // Logika setelah autentikasi berhasil
+            $id = Auth::guard('admin')->id();
+            $name = Admin::where('id', $id)->first();
+            // $name -> username;
+            // dd($name);
+            Alert::success('Login Sukses', 'Selamat datang');
             return redirect('/admin');
         }
 
         else if (Auth::guard('bidan')->attempt($data)) {
             // Logika setelah autentikasi berhasil
+            Alert::success('Login Sukses', 'Selamat datang');
             return redirect('/bidan/pasien');
         }
 
         else if (Auth::guard('pasien')->attempt($data)) {
+            Alert::success('Login Sukses', 'Selamat datang');
             return redirect('/pasien');
         }
 
         else{
-            return redirect('/auth/login');
+            Alert::warning('Gagal Login', 'Masukan Username atau Password dengan benar!!!');
+            return redirect() -> back();
         }
     }
 

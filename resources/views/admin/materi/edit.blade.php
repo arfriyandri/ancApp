@@ -29,7 +29,7 @@
                 </div>
             </div>
             <br>
-            <form action="/admin/materi/{{ $data['materis'] -> id }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('materi.update', $data['materis'] -> id) }}" method="POST" enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
                 <div class="row wrapper border-bottom white-bg page-heading">
@@ -38,7 +38,7 @@
                     </div>
                     <h2 class="pasien">Upload Materi</h2>
                     <div class="custom-file">
-                        <input id="file" name="file" type="file" class="custom-file-input">
+                        <input id="file" name="file" type="file" class="custom-file-input" value="{{ asset('storage/uploads/' . $data['materis'] -> file) }}">
                         <label for="file" class="custom-file-label">{{ $data['materis'] -> file }}</label>
                     </div>
                     <div class="container">
@@ -53,7 +53,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="button submit" class="btn pasien" name="Submit" value="submit">Tambah Data</button>
+                    <button type="button submit" class="btn pasien" name="Submit" value="submit">Simpan</button>
                 </div>
             </form>
         </div>

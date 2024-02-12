@@ -1,3 +1,4 @@
+</body>
 <!-- Jasny -->
 <script src="{{ asset('template/js/plugins/jasny/jasny-bootstrap.min.js') }}"></script>
 

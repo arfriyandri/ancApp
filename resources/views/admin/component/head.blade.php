@@ -18,3 +18,5 @@
     <link href="{{ asset('template/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css') }}"
         rel="stylesheet" />
 </head>
+<body>
+    @include('sweetalert::alert')

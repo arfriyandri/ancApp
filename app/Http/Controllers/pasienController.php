@@ -16,6 +16,7 @@ class pasienController extends Controller
 
         $data['title'] = 'Data Pasien';
         $data['pasiens'] = Pasien::with('bidan') -> get();
+        confirmDelete("Hapus Data Bidan", "Apakah Anda Yakin?");
 
 
         return view('admin.pasien.index', compact('data'));
