@@ -115,11 +115,6 @@ Route::middleware(['bidan']) -> group(
                 Route::prefix('/materi') -> group(
                     function(){
                         Route::get('/',[materiController::class, 'indexMateri']) -> name('materiBidan.index');
-                        // Route::get('create',[pasienController::class, 'create']) -> name('pasien.create');
-                        // Route::post('/',[pasienController::class, 'store']) -> name('pasien.store');
-                        // Route::get('{id}/edit',[pasienController::class, 'edit']) -> name('pasien.edit');
-                        // Route::put('{id}',[pasienController::class, 'update']) -> name('pasien.update');
-                        // Route::delete('{id}',[pasienController::class, 'destroy']) -> name('pasien.destroy');
                     }
                 );
                 Route::get('/logout',[authController::class, 'logout']);

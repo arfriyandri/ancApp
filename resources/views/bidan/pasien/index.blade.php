@@ -63,14 +63,9 @@
                                                             class="btn btn-info" style="margin: 6px">
                                                             <i class="fa fa-edit" title="edit"></i>
                                                         </a>
-                                                        <form action="/bidan/pasien/{{ $d->id }}"
-                                                            method="POST">
-                                                            @method('DELETE')
-                                                            @csrf
-                                                            <button class="btn btn-danger" style="margin: 6px">
-                                                                <i class="fa fa-trash" title="hapus"></i></a>
-                                                            </button>
-                                                        </form>
+                                                        <a href="{{ route('pasien.destroy', $d->id) }}" style="margin: 6px"
+                                                            class="btn btn-danger" data-confirm-delete="true"><i
+                                                                class="fa fa-trash" title="hapus"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>

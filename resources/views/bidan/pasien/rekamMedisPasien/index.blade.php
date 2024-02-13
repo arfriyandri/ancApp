@@ -63,13 +63,9 @@
                                                     <a href="/bidan/pasien/@foreach ( $data['pasiens'] as $value ){{ $value -> id }}@endforeach/rekamMedisPasien/{{ $d -> id }}/edit" class="btn btn-info" style="margin: 6px">
                                                         <i class="fa fa-edit" title="edit"></i>
                                                     </a>
-                                                    <form action="/bidan/pasien/@foreach ( $data['pasiens'] as $value ){{ $value -> id }}@endforeach/rekamMedisPasien/{{ $d -> id }}" method="POST">
-                                                        @method('DELETE')
-                                                        @csrf
-                                                        <button class="btn btn-danger" style="margin: 6px">
-                                                            <i class="fa fa-trash" title="hapus"></i></a>
-                                                        </button>
-                                                    </form>
+                                                    <a href="/bidan/pasien/@foreach ( $data['pasiens'] as $value ){{ $value -> id }}@endforeach/rekamMedisPasien/{{ $d -> id }}" style="margin: 6px"
+                                                        class="btn btn-danger" data-confirm-delete="true">@method('DELETE')<i
+                                                            class="fa fa-trash" title="hapus"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -113,13 +109,9 @@
                                                         <a href="/bidan/pasien/@foreach ( $data['pasiens'] as $value ){{ $value -> id }}@endforeach/jadwalPasien/{{ $d -> id }}/edit" class="btn btn-info" style="margin: 6px">
                                                             <i class="fa fa-edit" title="edit"></i>
                                                         </a>
-                                                        <form action="/bidan/pasien/@foreach ( $data['pasiens'] as $value ){{ $value -> id }}@endforeach/jadwalPasien/{{ $d -> id }}" method="POST">
-                                                            @method('DELETE')
-                                                            @csrf
-                                                            <button class="btn btn-danger" style="margin: 6px">
-                                                                <i class="fa fa-trash" title="hapus"></i></a>
-                                                            </button>
-                                                        </form>
+                                                        <a href="/bidan/pasien/@foreach ( $data['pasiens'] as $value ){{ $value -> id }}@endforeach/jadwalPasien/{{ $d -> id }}" style="margin: 6px"
+                                                            class="btn btn-danger" data-confirm-delete="true">@method('DELETE')<i
+                                                                class="fa fa-trash" title="hapus"></i></a>
                                                         </div>
                                                 </td>
                                             </tr>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\Pasien;
 use App\Models\Bidan;
 use App\Models\JadwalPasien;
@@ -12,29 +13,29 @@ use Illuminate\Support\Facades\Auth;
 
 class pasienController extends Controller
 {
-    public function index(){
-
+    public function index()
+    {
         $data['title'] = 'Data Pasien';
-        $data['pasiens'] = Pasien::with('bidan') -> get();
-        confirmDelete("Hapus Data Bidan", "Apakah Anda Yakin?");
-
+        $data['pasiens'] = Pasien::with('bidan')->get();
 
         return view('admin.pasien.index', compact('data'));
     }
 
-    public function indexPasien(){
+    public function indexPasien()
+    {
         $data['title'] = 'Antenatal Care';
         $data['materis'] = Materi::all();
 
         $pasienId = Auth::guard('pasien')->id();
         $data['pasiens'] = Pasien::findOrFail($pasienId);
-        $data['rekamMedis'] = RekamMedisPasien::where('id_pasiens', $pasienId) -> get();
-        $data['jadwal'] = JadwalPasien::where('id_pasiens', $pasienId) -> get();
+        $data['rekamMedis'] = RekamMedisPasien::where('id_pasiens', $pasienId)->get();
+        $data['jadwal'] = JadwalPasien::where('id_pasiens', $pasienId)->get();
 
         return view('pasien.index', compact('data'));
     }
 
-    public function indexBidan(){
+    public function indexBidan()
+    {
         $data['title'] = 'Data Pasien';
         $bidanId = Auth::guard('bidan')->id();
 
@@ -42,9 +43,13 @@ class pasienController extends Controller
         if ($bidanId !== null) {
             // Menggunakan findOrFail agar menghasilkan 404 jika bidan tidak ditemukan
             $data['bidans'] = Bidan::findOrFail($bidanId);
-             // Pastikan bahwa $bidan->pasiens merupakan objek yang valid
-            $pasiens = $data['bidans']-> pasiens;
+            // Pastikan bahwa $bidan->pasiens merupakan objek yang valid
+            $pasiens = $data['bidans']->pasiens;
             $data['pasiens'] = $pasiens;
+
+            $title = 'Hapus Data!';
+            $text = 'Apakah Anda Yakin?';
+            confirmDelete($title, $text);
 
             return view('bidan.pasien.index', compact('data'));
         } else {
@@ -53,19 +58,20 @@ class pasienController extends Controller
         }
     }
 
-    public function create(){
-        $data['title'] = "Data Pasien";
+    public function create()
+    {
+        $data['title'] = 'Data Pasien';
 
-        $bidanId= Auth::guard('bidan')->id();
+        $bidanId = Auth::guard('bidan')->id();
         $data['bidans'] = Bidan::findOrFail($bidanId);
         $pasiens = $data['bidans']->pasiens;
         $data['pasiens'] = $pasiens;
 
-
         return view('bidan.pasien.create', compact('data'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $request->validate([
             'id_bidans' => 'required',
             'username' => 'required',
@@ -79,7 +85,7 @@ class pasienController extends Controller
             'nomor_hp' => 'required',
         ]);
 
-        $dataToSave =[
+        $dataToSave = [
             'id_bidans' => $request->id_bidans,
             'username' => $request->username,
             'name' => $request->name,
@@ -93,16 +99,17 @@ class pasienController extends Controller
         ];
 
         Pasien::create($dataToSave);
+        Alert::success('Berhasil', 'Data Pasien Berhasil Ditambahkan');
 
-        return redirect() -> route('pasien.index');
-
+        return redirect('bidan/pasien');
     }
 
-    public function edit($id){
-        $data['title'] = "Data Pasien";
+    public function edit($id)
+    {
+        $data['title'] = 'Data Pasien';
         $data['idPasiens'] = Pasien::find($id);
 
-        $bidanId= Auth::guard('bidan')->id();
+        $bidanId = Auth::guard('bidan')->id();
         $data['bidans'] = Bidan::findOrFail($bidanId);
 
         $pasiens = $data['bidans']->pasiens;
@@ -111,16 +118,17 @@ class pasienController extends Controller
         return view('bidan.pasien.edit', compact('data'));
     }
 
-    public function update(Request $request, $id){
-        $username = $request -> username;
-        $name = $request -> name;
-        $password = bcrypt($request -> password);
-        $alamat = $request -> alamat;
-        $pekerjaan = $request -> pekerjaan;
-        $umur = $request -> umur;
-        $agama = $request -> agama;
-        $tinggi_badan = $request -> tinggi_badan;
-        $nomor_hp = $request -> nomor_hp;
+    public function update(Request $request, $id)
+    {
+        $username = $request->username;
+        $name = $request->name;
+        $password = bcrypt($request->password);
+        $alamat = $request->alamat;
+        $pekerjaan = $request->pekerjaan;
+        $umur = $request->umur;
+        $agama = $request->agama;
+        $tinggi_badan = $request->tinggi_badan;
+        $nomor_hp = $request->nomor_hp;
 
         $dataToUpdate = [
             'username' => $username,
@@ -134,15 +142,17 @@ class pasienController extends Controller
             'nomor_hp' => $nomor_hp,
         ];
 
-        Pasien::find($id) -> update($dataToUpdate);
+        Pasien::find($id)->update($dataToUpdate);
+        Alert::success('Berhasil', 'Data Bidan Berhasil Diperbarui');
 
-        return redirect() -> route('pasien.index');
+        return redirect('bidan/pasien');
     }
 
-    public function destroy($id){
-        Pasien::find($id) -> delete();
+    public function destroy($id)
+    {
+        Pasien::find($id)->delete();
+        Alert::success('Berhasil', 'Data Bidan Berhasil Dihapus');
 
-        return redirect() -> route('pasien.index');
+        return redirect()->back();
     }
-
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\RekamMedisPasien;
 use App\Models\Pasien;
 use App\Models\JadwalPasien;
@@ -11,40 +12,47 @@ use Illuminate\Support\Facades\Auth;
 
 class rekamMedisPasienController extends Controller
 {
-    public function indexPasien(){
-        $pasienId = Auth::guard('pasien') -> id();
+    public function indexPasien()
+    {
+        $pasienId = Auth::guard('pasien')->id();
         $data['pasiens'] = Pasien::find($pasienId);
-        $data['rekamMedis'] = RekamMedisPasien::where('id_pasiens',$pasienId) -> get();
+        $data['rekamMedis'] = RekamMedisPasien::where('id_pasiens', $pasienId)->get();
 
         return view('pasien.rekamMedis', compact('data'));
     }
 
-    public function indexRekam($id){
-        $data['title'] = "Data Pasien";
+    public function indexRekam($id)
+    {
+        $data['title'] = 'Data Pasien';
         $bidanId = Auth::guard('bidan')->id();
         $data['bidans'] = Bidan::find($bidanId);
-        $data['pasiens'] = Bidan::find($bidanId) -> pasiens;
+        $data['pasiens'] = Bidan::find($bidanId)->pasiens;
 
-        $data['rekam_medis'] = RekamMedisPasien::where('id_pasiens',$id) -> get();
-        $data['jadwals'] = JadwalPasien::where('id_pasiens',$id) -> get();
+        $data['rekam_medis'] = RekamMedisPasien::where('id_pasiens', $id)->get();
+        $data['jadwals'] = JadwalPasien::where('id_pasiens', $id)->get();
+
+        $title = 'Hapus Data!';
+        $text = 'Apakah Anda Yakin?';
+        confirmDelete($title, $text);
 
         return view('bidan.pasien.rekamMedisPasien.index', compact('data'));
     }
 
-    public function create(){
-        $data['title'] = "Data Pasien";
+    public function create()
+    {
+        $data['title'] = 'Data Pasien';
 
-        $bidanId= Auth::guard('bidan')->id();
+        $bidanId = Auth::guard('bidan')->id();
         $data['bidans'] = Bidan::find($bidanId);
         $bidan = Bidan::findOrFail($bidanId);
         $pasiens = $bidan->pasiens;
         $data['pasiens'] = $pasiens;
 
-
-        return view('bidan.pasien.rekamMedisPasien.create', compact('data','pasiens'));
+        return view('bidan.pasien.rekamMedisPasien.create', compact('data', 'pasiens'));
     }
 
-    public function store(Request $request, $id){
+    public function store(Request $request, $id)
+    {
         $request->validate([
             'id_bidans' => 'required',
             'id_pasiens' => 'required',
@@ -56,7 +64,7 @@ class rekamMedisPasienController extends Controller
             'hb' => 'required',
         ]);
 
-        $dataToSave =[
+        $dataToSave = [
             'id_bidans' => $request->id_bidans,
             'id_pasiens' => $request->id_pasiens,
             'berat_badan' => $request->berat_badan,
@@ -69,32 +77,33 @@ class rekamMedisPasienController extends Controller
 
         RekamMedisPasien::create($dataToSave);
 
-        $data['title'] = "Data Pasien";
-        $data['rekam_medis'] = RekamMedisPasien::where('id_pasiens',$id) -> get();
-        $data['jadwals'] = JadwalPasien::where('id_pasiens',$id) -> get();
-        $data['pasiens'] = Pasien::where('id',$id) -> get();
+        $data['title'] = 'Data Pasien';
+        $data['rekam_medis'] = RekamMedisPasien::where('id_pasiens', $id)->get();
+        $data['jadwals'] = JadwalPasien::where('id_pasiens', $id)->get();
+        $data['pasiens'] = Pasien::where('id', $id)->get();
 
-        $bidanId= Auth::guard('bidan')->id();
+        $bidanId = Auth::guard('bidan')->id();
         $data['bidans'] = Bidan::find($bidanId);
 
+        Alert::success('Berhasil', 'Data Pasien Berhasil Ditambahkan');
 
         return view('bidan.pasien.rekamMedisPasien.index', compact('data'));
-
     }
 
-    public function edit($id, $id_rekamMedis){
-        $data['title'] = "Data Pasien";
+    public function edit($id, $id_rekamMedis)
+    {
+        $data['title'] = 'Data Pasien';
         $data['rekam_medis'] = RekamMedisPasien::find($id_rekamMedis);
 
         $bidanId = Auth::guard('bidan')->id();
         $data['bidans'] = Bidan::find($bidanId);
-        $data['pasiens'] = Bidan::find($bidanId) -> pasiens;
+        $data['pasiens'] = Bidan::find($bidanId)->pasiens;
 
         return view('bidan.pasien.rekamMedisPasien.edit', compact('data'));
     }
 
-    public function update(Request $request,$id,$id_rekamMedis){
-
+    public function update(Request $request, $id, $id_rekamMedis)
+    {
         $berat_badan = $request->berat_badan;
         $jumlah_janin = $request->jumlah_janin;
         $keluhan = $request->keluhan;
@@ -111,23 +120,27 @@ class rekamMedisPasienController extends Controller
             'hb' => $hb,
         ];
 
-        RekamMedisPasien::find($id_rekamMedis) -> update($dataToUpdate);
+        RekamMedisPasien::find($id_rekamMedis)->update($dataToUpdate);
 
-        return redirect() -> route('rekamMedis.index',['id' => $id]);
+        Alert::success('Berhasil', 'Data Pasien Berhasil Diperbarui');
+
+        return redirect()->route('rekamMedis.index', ['id' => $id]);
     }
 
-    public function destroy($id,$id_rekamMedis){
-        $data['title'] = "Data Pasien";
-        RekamMedisPasien::find($id_rekamMedis) -> delete();
+    public function destroy($id, $id_rekamMedis)
+    {
+        $data['title'] = 'Data Pasien';
+        RekamMedisPasien::find($id_rekamMedis)->delete();
 
         $bidanId = Auth::guard('bidan')->id();
         $data['bidans'] = Bidan::find($bidanId);
-        $data['pasiens'] = Bidan::find($bidanId) -> pasiens;
+        $data['pasiens'] = Bidan::find($bidanId)->pasiens;
 
-        $data['rekam_medis'] = RekamMedisPasien::where('id_pasiens',$id) -> get();
-        $data['jadwals'] = JadwalPasien::where('id_pasiens',$id) -> get();
+        $data['rekam_medis'] = RekamMedisPasien::where('id_pasiens', $id)->get();
+        $data['jadwals'] = JadwalPasien::where('id_pasiens', $id)->get();
+
+        Alert::success('Berhasil', 'Data Pasien Berhasil Dihapus');
 
         return view('bidan.pasien.rekamMedisPasien.index', compact('data'));
     }
-
 }

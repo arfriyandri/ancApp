@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\RekamMedisPasien;
 use App\Models\Pasien;
 use App\Models\JadwalPasien;
@@ -51,6 +52,8 @@ class jadwalPasienController extends Controller
         $bidan = Bidan::findOrFail($bidanId);
         $data['bidans'] = Bidan::find($bidanId);
 
+        Alert::success('Berhasil', 'Data Jadwal Pasien Berhasil Ditambahkan');
+
 
         return view('bidan.pasien.rekamMedisPasien.index', compact('data'));
 
@@ -61,6 +64,7 @@ class jadwalPasienController extends Controller
         $data['jadwals'] = jadwalPasien::find($id_jadwal);
 
         $bidanId = Auth::guard('bidan')->id();
+        $data['bidans'] = Bidan::find($bidanId);
         $data['pasiens'] = Bidan::find($bidanId) -> pasiens;
 
         return view('bidan.pasien.jadwalPasien.edit', compact('data'));
@@ -78,6 +82,8 @@ class jadwalPasienController extends Controller
 
         jadwalPasien::find($id_jadwal) -> update($dataToUpdate);
 
+        Alert::success('Berhasil', 'Data Jadwal Pasien Berhasil Diperbarui');
+
         return redirect() -> route('rekamMedis.index',['id' => $id]);
     }
 
@@ -91,6 +97,8 @@ class jadwalPasienController extends Controller
 
         $data['rekam_medis'] = RekamMedisPasien::where('id_pasiens',$id) -> get();
         $data['jadwals'] = JadwalPasien::where('id_pasiens',$id) -> get();
+
+        Alert::success('Berhasil', 'Data Jadwal Pasien Berhasil Dihapus');
 
         return view('bidan.pasien.rekamMedisPasien.index', compact('data'));
     }
