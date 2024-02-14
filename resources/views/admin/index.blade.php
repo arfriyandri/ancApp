@@ -1,6 +1,5 @@
 @include('admin.component.head')
 
-
 <div id="wrapper">
     @include('admin.component.partisial.navbar')
 
@@ -13,7 +12,7 @@
                 <h2>Dashboard</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
-                        <a href="/admin">Grafik</a>
+                        <a href="/admin">Admin</a>
                     </li>
                 </ol>
             </div>

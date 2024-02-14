@@ -1,4 +1,4 @@
-    <div class="row container text-center"">
+    <div class="row container text-center">
         <div class="col-lg-4">
             <div class="ibox ">
                 <div class="ibox-title">
