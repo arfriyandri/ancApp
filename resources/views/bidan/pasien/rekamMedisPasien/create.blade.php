@@ -18,7 +18,7 @@
                             <a href="/bidan/pasien">Data Pasien</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="/bidan/pasien/@foreach ($data['pasiens'] as $d){{ $d -> id }}/rekamMedisPasien @endforeach">Data Rekam Medis</a>
+                            <a href="/bidan/pasien/{{ $data['pasiens'] -> id }}">Data Rekam Medis</a>
                         </li>
                         <li class="breadcrumb-item active">
                             <strong>Tambah Data Rekam Medis</strong>
@@ -29,16 +29,16 @@
                 </div>
             </div>
             <br>
-            <form action="/bidan/pasien/@foreach ($data['pasiens'] as $d){{ $d -> id }}/rekamMedisPasien @endforeach" method="POST">
+            <form action="/bidan/pasien/{{ $data['pasiens'] -> id }}/rekamMedisPasien" method="POST">
                 @csrf
                 <div class="row wrapper border-bottom white-bg page-heading wrapper-content animated fadeInRight">
-                    <h2 class="pasien">Tambah Rekam Medis @foreach ($data['pasiens'] as $d) {{ $d -> name }} @endforeach</h2>
+                    <h2 class="pasien">Tambah Rekam Medis {{ $data['pasiens'] -> name }}</h2>
                     <div class="container">
                         <div class="row">
                             <div class="col">
                                 <div class="col">
                                     <div class="" style="margin-left: 90px; margin-top: -30px;" hidden>
-                                        <input type="text" name="id_bidans" class="form-control" value="@foreach ($data['pasiens'] as $d ){{ $d -> bidan -> id }}@endforeach" required>
+                                        <input type="text" name="id_bidans" class="form-control" value="{{ $data['bidans'] -> id }}" required>
                                     </div>
                                 </div>
                             </div>
@@ -47,7 +47,7 @@
                             <div class="col">
                                 <div class="col">
                                     <div class="" style="margin-left: 90px; margin-top: -30px;" hidden>
-                                        <input type="text" name="id_pasiens" class="form-control" value="@foreach ($data['pasiens'] as $d ){{ $d -> id }}@endforeach" required>
+                                        <input type="text" name="id_pasiens" class="form-control" value="{{ $data['pasiens'] -> id }}" required>
                                     </div>
                                 </div>
                             </div>

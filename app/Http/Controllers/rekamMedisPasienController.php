@@ -26,7 +26,7 @@ class rekamMedisPasienController extends Controller
         $data['title'] = 'Data Pasien';
         $bidanId = Auth::guard('bidan')->id();
         $data['bidans'] = Bidan::find($bidanId);
-        $data['pasiens'] = Bidan::find($bidanId)->pasiens;
+        $data['pasiens'] = Pasien::find($id);
 
         $data['rekam_medis'] = RekamMedisPasien::where('id_pasiens', $id)->get();
         $data['jadwals'] = JadwalPasien::where('id_pasiens', $id)->get();
@@ -38,17 +38,15 @@ class rekamMedisPasienController extends Controller
         return view('bidan.pasien.rekamMedisPasien.index', compact('data'));
     }
 
-    public function create()
+    public function create($id)
     {
         $data['title'] = 'Data Pasien';
 
         $bidanId = Auth::guard('bidan')->id();
         $data['bidans'] = Bidan::find($bidanId);
-        $bidan = Bidan::findOrFail($bidanId);
-        $pasiens = $bidan->pasiens;
-        $data['pasiens'] = $pasiens;
+        $data['pasiens'] = Pasien::find($id);
 
-        return view('bidan.pasien.rekamMedisPasien.create', compact('data', 'pasiens'));
+        return view('bidan.pasien.rekamMedisPasien.create', compact('data'));
     }
 
     public function store(Request $request, $id)
@@ -76,18 +74,9 @@ class rekamMedisPasienController extends Controller
         ];
 
         RekamMedisPasien::create($dataToSave);
-
-        $data['title'] = 'Data Pasien';
-        $data['rekam_medis'] = RekamMedisPasien::where('id_pasiens', $id)->get();
-        $data['jadwals'] = JadwalPasien::where('id_pasiens', $id)->get();
-        $data['pasiens'] = Pasien::where('id', $id)->get();
-
-        $bidanId = Auth::guard('bidan')->id();
-        $data['bidans'] = Bidan::find($bidanId);
-
         Alert::success('Berhasil', 'Data Pasien Berhasil Ditambahkan');
 
-        return view('bidan.pasien.rekamMedisPasien.index', compact('data'));
+        return redirect()->route('rekamMedis.index', $id);
     }
 
     public function edit($id, $id_rekamMedis)
@@ -97,7 +86,8 @@ class rekamMedisPasienController extends Controller
 
         $bidanId = Auth::guard('bidan')->id();
         $data['bidans'] = Bidan::find($bidanId);
-        $data['pasiens'] = Bidan::find($bidanId)->pasiens;
+        $data['pasiens'] = Pasien::find($id);
+
 
         return view('bidan.pasien.rekamMedisPasien.edit', compact('data'));
     }
@@ -124,23 +114,14 @@ class rekamMedisPasienController extends Controller
 
         Alert::success('Berhasil', 'Data Pasien Berhasil Diperbarui');
 
-        return redirect()->route('rekamMedis.index', ['id' => $id]);
+        return redirect()->route('rekamMedis.index', $id);
     }
 
     public function destroy($id, $id_rekamMedis)
     {
-        $data['title'] = 'Data Pasien';
         RekamMedisPasien::find($id_rekamMedis)->delete();
-
-        $bidanId = Auth::guard('bidan')->id();
-        $data['bidans'] = Bidan::find($bidanId);
-        $data['pasiens'] = Bidan::find($bidanId)->pasiens;
-
-        $data['rekam_medis'] = RekamMedisPasien::where('id_pasiens', $id)->get();
-        $data['jadwals'] = JadwalPasien::where('id_pasiens', $id)->get();
-
         Alert::success('Berhasil', 'Data Pasien Berhasil Dihapus');
 
-        return view('bidan.pasien.rekamMedisPasien.index', compact('data'));
+        return redirect()->route('rekamMedis.index', $id);
     }
 }

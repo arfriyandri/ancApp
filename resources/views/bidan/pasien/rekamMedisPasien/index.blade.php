@@ -12,7 +12,7 @@
 
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>{{ $data['title'] }} @foreach ( $data['pasiens'] as $d ){{ $d -> name }}@endforeach</h2>
+                    <h2>{{ $data['title'] }} {{ $data['pasiens'] -> name }}</h2>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
                             <a href="/bidan/pasien">Data Pasien</a>
@@ -60,10 +60,10 @@
                                                 <td>{{ $d -> created_at}}</td>
                                                 <td>
                                                     <div class="row justify-content-center">
-                                                    <a href="/bidan/pasien/@foreach ( $data['pasiens'] as $value ){{ $value -> id }}@endforeach/rekamMedisPasien/{{ $d -> id }}/edit" class="btn btn-info" style="margin: 6px">
+                                                    <a href="/bidan/pasien/{{ $data['pasiens'] -> id }}/rekamMedisPasien/{{ $d -> id }}/edit" class="btn btn-info" style="margin: 6px">
                                                         <i class="fa fa-edit" title="edit"></i>
                                                     </a>
-                                                    <a href="/bidan/pasien/@foreach ( $data['pasiens'] as $value ){{ $value -> id }}@endforeach/rekamMedisPasien/{{ $d -> id }}" style="margin: 6px"
+                                                    <a href="/bidan/pasien/{{ $data['pasiens'] -> id }}/rekamMedisPasien/{{ $d -> id }}" style="margin: 6px"
                                                         class="btn btn-danger" data-confirm-delete="true">@method('DELETE')<i
                                                             class="fa fa-trash" title="hapus"></i></a>
                                                     </div>
@@ -74,7 +74,7 @@
                                     </table>
                                 </div>
                                 <div class="d-flex" style="padding-left: 15px">
-                                    <a href="/bidan/pasien/@foreach( $data['pasiens'] as $d ){{ $d -> id }}@endforeach/rekamMedisPasien/create" class="btn">Tambah data</a>
+                                    <a href="/bidan/pasien/{{ $data['pasiens'] -> id }}/rekamMedisPasien/create" class="btn">Tambah data</a>
                                 </div>
                             </div>
                         </div>
@@ -106,10 +106,10 @@
                                                 <td>{{ $d -> waktu}}</td>
                                                 <td>
                                                     <div class="row justify-content-center">
-                                                        <a href="/bidan/pasien/@foreach ( $data['pasiens'] as $value ){{ $value -> id }}@endforeach/jadwalPasien/{{ $d -> id }}/edit" class="btn btn-info" style="margin: 6px">
+                                                        <a href="/bidan/pasien/{{ $data['pasiens'] -> id }}/jadwalPasien/{{ $d -> id }}/edit" class="btn btn-info" style="margin: 6px">
                                                             <i class="fa fa-edit" title="edit"></i>
                                                         </a>
-                                                        <a href="/bidan/pasien/@foreach ( $data['pasiens'] as $value ){{ $value -> id }}@endforeach/jadwalPasien/{{ $d -> id }}" style="margin: 6px"
+                                                        <a href="/bidan/pasien/{{ $data['pasiens'] -> id }}/jadwalPasien/{{ $d -> id }}" style="margin: 6px"
                                                             class="btn btn-danger" data-confirm-delete="true">@method('DELETE')<i
                                                                 class="fa fa-trash" title="hapus"></i></a>
                                                         </div>
@@ -120,7 +120,7 @@
                                     </table>
                                 </div>
                                 <div class="d-flex" style="padding-left: 15px">
-                                    <a href="/bidan/pasien/@foreach( $data['pasiens'] as $d ){{ $d -> id }}@endforeach/jadwalPasien/create" class="btn">Tambah data</a>
+                                    <a href="/bidan/pasien/{{ $data['pasiens'] -> id }}/jadwalPasien/create" class="btn">Tambah data</a>
                                 </div>
                             </div>
                         </div>

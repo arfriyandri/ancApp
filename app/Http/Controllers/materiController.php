@@ -25,21 +25,13 @@ class materiController extends Controller
 
     public function indexMateri()
     {
-        $data['title'] = 'Data Materi';
-        $data['materis'] = Materi::all();
-
         $bidanId = Auth::guard('bidan')->id();
 
-        // Pastikan bidanId tidak null sebelum menggunakan find
-        if ($bidanId !== null) {
-            // Menggunakan findOrFail agar menghasilkan 404 jika bidan tidak ditemukan
-            $bidan = Bidan::findOrFail($bidanId);
-
-            // Pastikan bahwa $bidan->pasiens merupakan objek yang valid
-            $pasiens = $bidan->pasiens;
-        }
-
-        $data['pasiens'] = $pasiens;
+        $data = [
+            'title' => 'Data Materi',
+            'materis' => Materi::all(),
+            'bidans' => Bidan::find($bidanId),
+        ];
 
         return view('bidan.materi.index', compact('data'));
     }

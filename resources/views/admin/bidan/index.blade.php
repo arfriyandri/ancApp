@@ -6,7 +6,7 @@
     <div id="page-wrapper" class="gray-bg">
 
         <header>
-            @include('admin.pasien.partisial.header')
+            @include('admin.component.partisial.header')
         </header>
 
         <div class="row wrapper border-bottom white-bg page-heading">
