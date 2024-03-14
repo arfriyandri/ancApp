@@ -27,7 +27,7 @@
                         <div class="ibox">
                             <div class="ibox-content product-box">
                                 <div class="product-imitation">
-                                    <img alt="image" src="{{ asset('template/assets/img/logo.jpeg') }}" style="width: 100px" />
+                                    <img alt="image" src="{{ asset('template/assets/img/materi.png') }}" style="width: 100px" />
                                 </div>
                                 <div class="product-desc">
                                     <small class="text-muted">Materi</small>
