@@ -44,7 +44,7 @@
                                             <tr class="gradeX">
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $d->judul }}</td>
-                                                <td><a href="{{ asset('public/storage/uploads/'.$d->file) }}"
+                                                <td><a href="{{ asset('storage/uploads/' . $d -> file) }}"
                                                         target="_blank">{{ $d->file }}</a></td>
                                                 <td>
                                                     <div class="row justify-content-center">
