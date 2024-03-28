@@ -6,6 +6,7 @@ use App\Models\Admin;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class authController extends Controller
 {
@@ -29,9 +30,6 @@ class authController extends Controller
         if (Auth::guard('admin')->attempt($data)) {
             // Logika setelah autentikasi berhasil
             $id = Auth::guard('admin')->id();
-            $name = Admin::where('id', $id)->first();
-            // $name -> username;
-            // dd($name);
             Alert::success('Login Sukses', 'Selamat datang');
             return redirect('/admin');
         }

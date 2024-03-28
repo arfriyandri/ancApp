@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="col">
                                     <div class="" style="margin-left: 90px; margin-top: -30px;">
-                                        <input type="text" name="username" class="form-control" placeholder="NIK" required>
+                                        <input type="text" onkeypress="return onlyNumberKey(event)" name="username" class="form-control" placeholder="NIK" required>
                                     </div>
                                 </div>
                             </div>
@@ -107,7 +107,7 @@
                                 </div>
                                 <div class="col">
                                     <div class="" style="margin-left: 90px; margin-top: -30px;">
-                                        <input type="text" name="umur" class="form-control" placeholder="Umur" required>
+                                        <input type="text" onkeypress="return onlyNumberKey(event)" name="umur" class="form-control" placeholder="Umur" required>
                                     </div>
                                 </div>
                             </div>
@@ -139,7 +139,7 @@
                                 </div>
                                 <div class="col">
                                     <div class="" style="margin-left: 90px; margin-top: -30px;">
-                                        <input type="text" name="tinggi_badan" class="form-control" placeholder="Tinggi Badan (cm)" required>
+                                        <input type="text" onkeypress="return onlyNumberKey(event)" name="tinggi_badan" class="form-control" placeholder="Tinggi Badan (cm)" required>
                                     </div>
                                 </div>
                             </div>
@@ -151,7 +151,7 @@
                                 </div>
                                 <div class="col">
                                     <div class="" style="margin-left: 90px; margin-top: -30px;">
-                                        <input type="text" name="nomor_hp" class="form-control" placeholder="Nomor HP" required>
+                                        <input type="text" onkeypress="return onlyNumberKey(event)" name="nomor_hp" class="form-control" placeholder="Nomor HP" required>
                                     </div>
                                 </div>
                             </div>
@@ -165,6 +165,13 @@
 </body>
 @include('bidan.component.foot')
 <script>
+    function onlyNumberKey(evt) {
+        var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+        if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+            return false;
+        return true;
+    }
+
     $(document).ready(function() {
         $('.dataTables-example').DataTable({
             pageLength: 25,

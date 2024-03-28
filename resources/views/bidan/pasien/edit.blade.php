@@ -12,7 +12,7 @@
 
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>{{ $data['title'] }} @foreach ( $data['pasiens'] as $d ){{ $d -> name }}@endforeach</h2>
+                    <h2>{{ $data['title'] }} {{ $data['idPasiens'] -> name }}</h2>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
                             <a href="/bidan/pasien">Data Pasien</a>
@@ -143,7 +143,7 @@
                                 </div>
                                 <div class="col">
                                     <div class="" style="margin-left: 90px; margin-top: -30px;">
-                                        <input type="text" name="nomor_hp" class="form-control" placeholder="Nomor HP" value="{{ $data['idPasiens'] -> nomor_hp }}">
+                                        <input type="text" onkeypress="return onlyNumberKey(event)" name="nomor_hp"  class="form-control" placeholder="Nomor HP" value="{{ $data['idPasiens'] -> nomor_hp }}">
                                     </div>
                                 </div>
                             </div>
